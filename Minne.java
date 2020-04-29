@@ -9,8 +9,15 @@ public class Minne {
     private SimpleStringProperty kapasitet;
     private SimpleStringProperty hastighet;
     private double pris;
+    private SimpleStringProperty komponentsnavn;
 
+    Minne(){
+        komponentsnavn.set("Minne");
+    }
 
+    public String getKomponentsnavn() {
+        return komponentsnavn.getName();
+    }
 
     public void setProdusenter(SimpleStringProperty navn) throws Unntakk {
         String re= "(((C|c)rosair)|(C(C|c)rucial)|((D|d)ell)|((H|h)yperX))"; //lovelig input

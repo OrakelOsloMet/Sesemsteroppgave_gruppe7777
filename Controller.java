@@ -101,6 +101,10 @@ public class Controller <T> implements Initializable {
         }catch (Unntakk e){
             lbl_feilmelding_minne.setText( e.getMessage());
          }
+        //....info til fil (automatisk)
+        //...en kanpp for hente info
+        //.................leggetabelview...................
+
 
 
     }
@@ -112,8 +116,11 @@ public class Controller <T> implements Initializable {
     @FXML
     TableView <Minne>tableView;
 
+    @FXML
     private  TableColumn<Minne, String> komponentnavn;
+    @FXML
     private TableColumn<Minne, String> kompBeskrivelse;
+
     ObservableList<Minne> komponenter_list= FXCollections.observableArrayList();
 
     @Override
@@ -126,4 +133,7 @@ public class Controller <T> implements Initializable {
 
 
     }
+
+
+
     }
