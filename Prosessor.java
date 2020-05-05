@@ -6,8 +6,12 @@ public class Prosessor {
     private int antall_core;
     private int antall_threads;
     private double pris;
+    private String komponentsnavn;
     //int  fart;  GHz
 
+    Prosessor(){
+        komponentsnavn="Prosessor";
+    }
 
     //setters
     public void setPris(String pris) throws Unntakk  {
@@ -75,7 +79,7 @@ public class Prosessor {
         this.antall_core=at;
         System.out.println(antall_core);
     }
-    //[a-z]
+
 
     public void setAntallThreads(String ant_threads) throws Unntakk {
         //ikke lov at antall threads er færre enn antall core (men de kan være like)
@@ -102,7 +106,6 @@ public class Prosessor {
 
         }
         this.antall_threads=at;
-        System.out.println(antall_threads);
     }
 
 
@@ -117,7 +120,9 @@ public class Prosessor {
 
     public double getPris() { return pris; }
 
-
+    public String getKomponentsnavn(){
+        return komponentsnavn;
+    }
     @Override
     public String toString() {
 

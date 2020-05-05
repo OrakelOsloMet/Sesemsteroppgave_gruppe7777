@@ -7,9 +7,11 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="909.0" prefWidth="1525.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Button id="add" layoutX="212.0" layoutY="149.0" mnemonicParsing="false" onAction="#btn_add_prosessor" prefHeight="25.0" prefWidth="170.0" text="legg til" />
       <Label layoutX="149.0" layoutY="79.0" prefHeight="17.0" prefWidth="30.0" text="type" />
@@ -20,8 +22,7 @@
       <Label layoutX="364.0" layoutY="79.0" text="antall threads" />
       <Label layoutX="26.0" layoutY="100.0" text="prosessor" textFill="RED" wrapText="true" />
       <Separator layoutY="198.0" prefHeight="4.0" prefWidth="593.0" />
-      <Label id="lbl_output" fx:id="lbl_output" layoutX="45.0" layoutY="402.0" prefHeight="25.0" prefWidth="475.0" />
-      <Label fx:id="lbl_feilmelding" layoutX="217.0" layoutY="14.0" prefHeight="48.0" prefWidth="218.0" textFill="RED" wrapText="true" />
+      <Label fx:id="lbl_feilmelding" layoutX="175.0" layoutY="23.0" prefHeight="41.0" prefWidth="272.0" textFill="RED" wrapText="true" />
       <Accordion layoutX="257.0" layoutY="258.0" />
       <TextField fx:id="txt_pris" layoutX="467.0" layoutY="96.0" prefHeight="25.0" prefWidth="95.0" promptText="eks. 500.00" />
       <Label layoutX="499.0" layoutY="79.0" text="pris" />
@@ -33,7 +34,7 @@
       <TextField id="txt_core" fx:id="txt_kapasitet" layoutX="225.0" layoutY="297.0" prefHeight="25.0" prefWidth="86.0" promptText="eks. 8" />
       <TextField id="txt_threads" fx:id="txt_hastighet" layoutX="335.0" layoutY="297.0" prefHeight="25.0" prefWidth="95.0" promptText="eks. 1600" />
       <Label layoutX="35.0" layoutY="301.0" text="minne" textFill="RED" wrapText="true" />
-      <Label fx:id="lbl_feilmelding_minne" layoutX="206.0" layoutY="210.0" prefHeight="48.0" prefWidth="183.0" textFill="RED" wrapText="true" />
+      <Label fx:id="lbl_feilmelding_minne" layoutX="206.0" layoutY="210.0" prefHeight="41.0" prefWidth="242.0" textFill="RED" wrapText="true" />
       <TextField fx:id="txt_pris_minne" layoutX="458.0" layoutY="297.0" prefHeight="25.0" prefWidth="95.0" promptText="eks. 600.00" />
       <Label layoutX="556.0" layoutY="301.0" text="kr." />
       <Label layoutX="117.0" layoutY="280.0" text="produsenter" />
@@ -41,11 +42,26 @@
       <Label layoutX="358.0" layoutY="280.0" text="hastighet" />
       <Label layoutX="489.0" layoutY="280.0" text="pris" />
       <Separator layoutX="1.0" layoutY="398.0" prefHeight="4.0" prefWidth="593.0" />
-      <TableView fx:id="tableView" layoutX="70.0" layoutY="440.0" prefHeight="200.0" prefWidth="457.0">
+      <TableView fx:id="tableView" editable="true" layoutX="38.0" layoutY="438.0" prefHeight="201.0" prefWidth="518.0">
         <columns>
-          <TableColumn fx:id="komponentnavn" prefWidth="141.66668701171875" text="kompoenents navn" />
-          <TableColumn fx:id="kompBeskrivelse" prefWidth="314.0" text="beskrivelse" />
-        </columns>
+          <TableColumn fx:id="kompN" onEditCommit="#RedigerKnavn" prefWidth="141.66668701171875" text="kompoenents navn">
+           <cellValueFactory> <PropertyValueFactory property="knavn" /> </cellValueFactory>
+            <cellFactory>  <TextFieldTableCell fx:factory="forTableColumn" />  </cellFactory>
+        </TableColumn>
+
+         <TableColumn fx:id="kompB" onEditCommit="#RedigerSpes" prefWidth="267.0" text="beskrivelse">
+             <cellValueFactory> <PropertyValueFactory property="spes" />  </cellValueFactory>
+             <cellFactory>  <TextFieldTableCell fx:factory="forTableColumn" />  </cellFactory>
+          </TableColumn>
+          <TableColumn fx:id="kolonne_pris" prefWidth="123.0" text="pris (kr)">
+              <cellValueFactory> <PropertyValueFactory property="k_pris" />  </cellValueFactory>
+            <cellFactory>  <TextFieldTableCell fx:factory="forTableColumn" />  </cellFactory>
+          </TableColumn>
+      </columns>
       </TableView>
+      <Button layoutX="458.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_fjern_rad_fraTV" text="fjern valgte rad" />
+      <TextField fx:id="txt_søkfelt" layoutX="147.0" layoutY="402.0" prefHeight="25.0" prefWidth="299.0" promptText="søkfelt" />
+      <Button layoutX="586.0" layoutY="404.0" mnemonicParsing="false" onAction="#btn_lagre_til_fil" prefHeight="25.0" prefWidth="103.0" text="lagre til fil" />
+      <Button layoutX="20.0" layoutY="404.0" mnemonicParsing="false" onAction="#Sortering_alfabetsisk" text="sortere Alfabetisk" />
    </children>
 </AnchorPane>

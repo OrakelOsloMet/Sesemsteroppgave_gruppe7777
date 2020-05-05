@@ -1,58 +1,61 @@
 package sample;
 
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Minne {
 
-    private SimpleStringProperty produsenter;
-    private SimpleStringProperty kapasitet;
-    private SimpleStringProperty hastighet;
-    private double pris;
-    private SimpleStringProperty komponentsnavn;
+    private String produsenter;
+    private String kapasitet;
+    private String hastighet;
+    private Double pris;
+    private String komponentsnavn;
 
     Minne(){
-        komponentsnavn.set("Minne");
+        komponentsnavn="Minne";
+
     }
 
     public String getKomponentsnavn() {
-        return komponentsnavn.getName();
+        return komponentsnavn;
     }
 
-    public void setProdusenter(SimpleStringProperty navn) throws Unntakk {
-        String re= "(((C|c)rosair)|(C(C|c)rucial)|((D|d)ell)|((H|h)yperX))"; //lovelig input
-        if ((navn.get()).isEmpty()){
+    public void setProdusenter(String navn) throws Unntakk {
+        String re= "(((C|c)rosair)|(C(C|c)rucial)|((D|d)ell)|((H|h)yperX))"; //lovelig input for navn av produsentere
+        if (navn.isEmpty()) {
             throw new Unntakk("Vennligst, fyll produsenters navn!");
         }
 
-        else if(!(navn.get()).matches(re)){
+        else if(!(navn).matches(re)){
             throw new Unntakk("Ugyldig navn!");
         }
-        this.produsenter = navn;
+        this.produsenter= navn;
 
     }
 
 
-    public void setKapasitet(SimpleStringProperty kapasitet) throws Unntakk{
+    public void setKapasitet(String kapasitet) throws Unntakk{
         String re= "((8)|(16)|(32))"; //lovelig input
-        if ( (kapasitet.get()).isEmpty()){
+        if ( kapasitet.isEmpty()){
             throw new Unntakk("Vennligst, fyll kapasitet!");
         }
 
-        else if(!(kapasitet.get()).matches(re)){
+        else if(!(kapasitet).matches(re)){
             throw new Unntakk("Ugyldig kapasitet!");
         }
-        this.kapasitet = kapasitet;
+        this.kapasitet =kapasitet;
 
     }
 
-    public void setHastighet(SimpleStringProperty hastighet) throws Unntakk{
+    public void setHastighet(String hastighet) throws Unntakk{
         String re= "((1600)|(2400)|(3200))"; //lovelig input
-        if ((hastighet.get()).isEmpty()){
+        if (hastighet.isEmpty()){
             throw new Unntakk("Vennligst, fyll hastighet!");
         }
 
-        else if(!(hastighet.get()).matches(re)){
+        else if(!(hastighet).matches(re)){
             throw new Unntakk("Ugyldig hastighet!");
         }
         this.hastighet = hastighet;
@@ -81,27 +84,27 @@ public class Minne {
     }
 
     public String getProdusenter() {
-        return produsenter.get();
+        return produsenter;
     }
 
     public String getHastighet() {
-        return hastighet.get();
+        return hastighet;
     }
 
     public String getKapasitet() {
-        return kapasitet.get();
+        return kapasitet;
     }
 
     public double getPris() {
         return pris;
     }
 
+
     @Override
     public String toString() {
-
         String all_spes= "navn: "+ produsenter+",  hastighet: "+ hastighet+ ",  kapasitet: "+ kapasitet + ",  pris: "+ pris;
-
         return all_spes;
     }
+
 
 }
