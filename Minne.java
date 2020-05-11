@@ -1,9 +1,6 @@
 package sample;
 
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 
 public class Minne {
 
@@ -102,8 +99,9 @@ public class Minne {
 
     @Override
     public String toString() {
-        String all_spes= "navn: "+ produsenter+",  hastighet: "+ hastighet+ ",  kapasitet: "+ kapasitet + ",  pris: "+ pris;
+        String all_spes= "navn: "+ produsenter+",  hastighet: "+ hastighet+ ",  kapasitet: "+ kapasitet;
         return all_spes;
+        //return String.format("%s navn %s hastighet %s kapasitet %s pris", .......);
     }
 
 

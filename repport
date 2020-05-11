@@ -2,6 +2,16 @@ Vi bestemte oss for å bruke Java 8.1 fordi det er litt vanskelig å finne løsn
 
 Vi kunne har laget flere klasser (for eks. valideringsklasse....). Men det virker like bra uten.
 
-
+vi prøvde å gjøre programmet så realistisk som mulig ( særlig med validering)
+Selv om vi vet at det er best å dele tasks i små biter, begrenset vi antall filer for å ha bedre oversikt over ting.
 Controller:
 Hver del innh
+
+
+
+logg inn:
+    brukernavn: ...@admin.oslomet.no
+    passord må være kompinasjon mellom tall, små og store bokstaver og et spesiall tegn
+    etter at man trykker på kappen som lagrer til filen, slettes alt
+
+ fil: du må trykke på buttom lagre til fil for å lagre komponenter du har lagt til tableview

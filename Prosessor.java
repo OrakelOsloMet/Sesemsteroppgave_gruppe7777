@@ -126,15 +126,10 @@ public class Prosessor {
     @Override
     public String toString() {
 
-        String all_spes= "type: "+ type+",  antall core: "+ antall_core+ ",  antall threads: "+ antall_threads + ",  pris: "+ pris;
+        String all_spes= "type: "+ type+",  antall core: "+ antall_core+ ",  antall threads: "+ antall_threads;
 
         return all_spes;
     }
 
 }
-/*
-ideer:
-har slette:
-redigering opprette en klasse   @Override
 
- */

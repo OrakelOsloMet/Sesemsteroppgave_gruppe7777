@@ -7,16 +7,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.paint.Color;
+
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.TableColumn;
-import javafx.stage.FileChooser;
-import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
-
+import static sample.Dialogs.showErrorDialog;
+import static sample.Dialogs.showSuccessDialog;
 
 public class Controller  implements Initializable {
 
@@ -38,8 +40,18 @@ public class Controller  implements Initializable {
 
 
     @FXML
-    private TextField txt_søkfelt;
+    private TextField txt_søkfelt;//filtering
 
+
+      ObjectOutputStream  doc;
+    ArrayList<Beholder> data_til_Fil= new  ArrayList<Beholder>();
+    /*
+    Controller() throws IOException, FileNotFoundException {
+        FileOutputStream fileOutputStream  = new FileOutputStream(new File("kompoenters_data.bin"));
+        doc = new ObjectOutputStream(fileOutputStream);
+
+    }
+     */
 
     @FXML
     void btn_add_prosessor(ActionEvent event) throws Unntakk{
@@ -58,7 +70,7 @@ public class Controller  implements Initializable {
         Beholder b=new Beholder(pros.getKomponentsnavn(), pros.toString(), pros.getPris());
 
         collection.addElement(b);
-
+        data_til_Fil.add(b);
         lbl_feilmelding.setTextFill(Color.web("#1c9b23"));// gi beskjed med grønn text at man har satt alt info riktiglbl_feilmelding.setText("Du har lagt et nytt element til TabelView!");//......lagre info............
         lbl_feilmelding.setText("\"Du har lagt et nytt element til TabelView!\"");
 
@@ -76,8 +88,8 @@ public class Controller  implements Initializable {
 
     }
 
-//......................................................................................................................
 
+//......................................................................................................................
 
 
 //Minne
@@ -111,15 +123,17 @@ public class Controller  implements Initializable {
             obj.setPris(txt_pris_minne.getText());
             Beholder b=new Beholder(obj.getKomponentsnavn(), obj.toString(), obj.getPris());
             collection.addElement(b);
-                lbl_feilmelding_minne.setTextFill(Color.web("#1c9b23"));// gi beskjed med grønn text at man har satt alt info riktig
-                lbl_feilmelding_minne.setText("Du har lagt et nytt element til TabelView!");
-            //......lagre info............
+            lbl_feilmelding_minne.setTextFill(Color.web("#1c9b23"));// gi beskjed med grønn text at man har satt alt info riktig
 
+            lbl_feilmelding_minne.setText("Du har lagt et nytt element til TabelView!");
+            data_til_Fil.add(b);
+            //......lagre info til en arraylist............
+            //data_til_Fil.add(b);
             //reset minne etter info er lagret
-                txt_produsenter.setText("");
-                txt_hastighet.setText("");
-                txt_kapasitet.setText("");
-                txt_pris_minne.setText("");
+             txt_produsenter.setText("");
+             txt_hastighet.setText("");
+             txt_kapasitet.setText("");
+             txt_pris_minne.setText("");
 
 
             } catch (Unntakk u){
@@ -138,7 +152,7 @@ public class Controller  implements Initializable {
 
 
     }
-//......................................................................................................................
+//.................................tableView.....................................................................................
 
 
     @FXML
@@ -150,10 +164,15 @@ public class Controller  implements Initializable {
 
     @FXML
     TableColumn<Beholder, Double> kolonne_pris;
+
+
     @Override
 
     public void initialize (URL location, ResourceBundle resources) {
 
+
+
+    //.........................................................
         collection.attachTableView(tableView);
         kolonne_pris.setCellFactory(TextFieldTableCell.forTableColumn(  new javafx.util.converter.DoubleStringConverter()));
         obs = tableView.getItems();
@@ -206,9 +225,112 @@ public class Controller  implements Initializable {
         event.getRowValue().setK_pris(event.getNewValue());
     }
 
+
+    //sortering basert på pris fra lavest til høyst
+    public void Sortering_pris(ActionEvent actionEvent) {
+        tableView.getSortOrder().add(kolonne_pris);
+    }
+
+
+    public void lese(ActionEvent actionEvent) throws Exception {
+
+        ArrayList<Beholder> a=new ArrayList<>();
+
+        //throw not found file ex
+        Scanner lese = new Scanner(new File("kompoenters_data.txt"));
+        while(lese.hasNextLine()){
+            String [] liste=lese.nextLine().split(";");
+            if(liste.length!=3 ){ //dvs. at formatet er ikke riktig
+                throw  new Exception("feil fil format"); //isteden Alart
+            }
+            //exeption if the line is not in the right format
+            //???????????
+            try{
+                Double pris= Double.parseDouble(liste[2]);//konvertering er feil.
+            }catch (Exception io){
+                //Feil file format
+                //alart
+            }
+            Beholder b= new Beholder(liste[0], liste[1], Double.parseDouble(liste[2]));
+            a.add(b);
+        }
+
+        for (Beholder b:a){
+            System.out.println(b.getK_pris());
+        }
+        /*
+
+
+        //initialisering av filbehandling
+        FileOutputStream  fileOutputStream= null;
+        try {
+            fileOutputStream = new FileOutputStream(new File("kompoenters_data.dat"));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            doc = new ObjectOutputStream(fileOutputStream);
+            doc.writeUTF("hei");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileInputStream fis= new FileInputStream("kompoenters_data.dat");
+            ObjectInputStream reading= new ObjectInputStream(fis);
+            lbl_feilmelding.setText(""+reading.read());
+            while(reading.available() > 0){
+                String s= reading.readUTF();
+                System.out.println(s);
+            }
+            reading.close();
+            //	readUTF()
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (EOFException e) {
+            e.printStackTrace();
+            System.out.println("Majdi");
+        }
+
+         */
+
+    }
+
+
     @FXML
     void btn_lagre_til_fil(ActionEvent event) {
-        FileChooser saver = new FileChooser();
+
+
+        String filnavn= "kompoenters_data.bin";
+        PrintWriter pw = null;
+        FileWriter fw= null; //den lar oss skrive tileksisterende fil og unngår å overskrive info som ble lagt fra gør til fil
+        try {
+
+            fw= new FileWriter(filnavn, true);//hvis jeg setter parameter til false , kommer den til å override info
+            pw = new PrintWriter(fw);
+
+        } catch (FileNotFoundException e) {
+            showErrorDialog("Fil ikke funnet!");
+            System.exit(1); //drepe kjøringen
+        }catch (IOException e) {
+            showErrorDialog("Input er ikke riktig!");  //eller "Det som failer er: "+e.getMessage()
+            System.exit(1); //drepe kjøringen
+        }
+
+
+
+        for(int i=0; i< data_til_Fil.size(); i++){ //skrive alle komponenter (som er på tableView) til filen
+            //System.out.println(data_til_Fil.get(i).getKnavn());
+            pw.println(data_til_Fil.get(i).getKnavn()+";" + data_til_Fil.get(i).getSpes()+";"+data_til_Fil.get(i).getK_pris());
+
+
+        }
+        showSuccessDialog("Du har lagret riktig komponentene til fil!");
+        pw.close();
+        collection.liste.clear();// nullsitte tableviewet slik at jeg unngå å legge til elementene som jeg har allerede lagt til filen
+        tableView.refresh();
+
 
     }
 

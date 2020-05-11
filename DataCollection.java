@@ -18,4 +18,15 @@ public class DataCollection {
         liste.add(obj);
     }
 
+    public ObservableList<Beholder> hentCollectionList(){
+        return liste;
+    }
+    public void hent(){
+        for(int i=0; i< liste.size(); i++){
+            System.out.println( liste.get(i).toString());
+        }
+
+
+    }
+
 }

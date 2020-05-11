@@ -50,6 +50,7 @@ public class LoggInnController {
                 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
                 window.setScene(adminScene);
+                window.fullScreenProperty();
                 window.show();
             } catch (Unntakk u){
                 label_feilmelding.setText( u.getMessage());
@@ -66,7 +67,7 @@ public class LoggInnController {
 
                     //This line gets the Stage information
                     Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
+                    window.setTitle("Admin side");
                     window.setScene(adminScene);
                     window.show();
                 } catch (Unntakk u){

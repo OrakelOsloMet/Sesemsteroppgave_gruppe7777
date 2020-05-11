@@ -35,4 +35,8 @@ public class Beholder{
     }
 
     public void setK_pris(double k_pris) { this.k_pris.set(k_pris); }
+
+
+
+
 }

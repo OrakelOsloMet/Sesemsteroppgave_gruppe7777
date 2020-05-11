@@ -10,6 +10,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.cell.TextFieldTableCell?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="909.0" prefWidth="1525.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
@@ -41,27 +42,29 @@
       <Label layoutX="233.0" layoutY="280.0" text="kapasitet(GB)" />
       <Label layoutX="358.0" layoutY="280.0" text="hastighet" />
       <Label layoutX="489.0" layoutY="280.0" text="pris" />
-      <Separator layoutX="1.0" layoutY="398.0" prefHeight="4.0" prefWidth="593.0" />
-      <TableView fx:id="tableView" editable="true" layoutX="38.0" layoutY="438.0" prefHeight="201.0" prefWidth="518.0">
+      <TableView fx:id="tableView" editable="true" layoutX="304.0" layoutY="452.0" prefHeight="128.0" prefWidth="756.0">
         <columns>
           <TableColumn fx:id="kompN" onEditCommit="#RedigerKnavn" prefWidth="141.66668701171875" text="kompoenents navn">
            <cellValueFactory> <PropertyValueFactory property="knavn" /> </cellValueFactory>
             <cellFactory>  <TextFieldTableCell fx:factory="forTableColumn" />  </cellFactory>
         </TableColumn>
 
-         <TableColumn fx:id="kompB" onEditCommit="#RedigerSpes" prefWidth="267.0" text="beskrivelse">
+         <TableColumn fx:id="kompB" onEditCommit="#RedigerSpes" prefWidth="499.6666259765625" text="beskrivelse">
              <cellValueFactory> <PropertyValueFactory property="spes" />  </cellValueFactory>
              <cellFactory>  <TextFieldTableCell fx:factory="forTableColumn" />  </cellFactory>
           </TableColumn>
-          <TableColumn fx:id="kolonne_pris" prefWidth="123.0" text="pris (kr)">
+          <TableColumn fx:id="kolonne_pris" prefWidth="122.3333740234375" text="pris (kr)">
               <cellValueFactory> <PropertyValueFactory property="k_pris" />  </cellValueFactory>
             <cellFactory>  <TextFieldTableCell fx:factory="forTableColumn" />  </cellFactory>
           </TableColumn>
       </columns>
       </TableView>
-      <Button layoutX="458.0" layoutY="402.0" mnemonicParsing="false" onAction="#btn_fjern_rad_fraTV" text="fjern valgte rad" />
-      <TextField fx:id="txt_søkfelt" layoutX="147.0" layoutY="402.0" prefHeight="25.0" prefWidth="299.0" promptText="søkfelt" />
-      <Button layoutX="586.0" layoutY="404.0" mnemonicParsing="false" onAction="#btn_lagre_til_fil" prefHeight="25.0" prefWidth="103.0" text="lagre til fil" />
-      <Button layoutX="20.0" layoutY="404.0" mnemonicParsing="false" onAction="#Sortering_alfabetsisk" text="sortere Alfabetisk" />
+      <Button layoutX="917.0" layoutY="412.0" mnemonicParsing="false" onAction="#btn_fjern_rad_fraTV" prefHeight="36.0" prefWidth="104.0" text="fjern valgte rad" />
+      <TextField fx:id="txt_søkfelt" layoutX="310.0" layoutY="414.0" prefHeight="32.0" prefWidth="329.0" promptText="søkfelt" />
+      <Button layoutX="798.0" layoutY="414.0" mnemonicParsing="false" onAction="#btn_lagre_til_fil" prefHeight="33.0" prefWidth="102.0" text="lagre til fil" />
+      <Button layoutX="673.0" layoutY="414.0" mnemonicParsing="false" onAction="#Sortering_pris" prefHeight="32.0" prefWidth="104.0" text="sortere på priser" />
+      <Line endX="-40.66668701171875" endY="363.5" layoutX="722.0" layoutY="26.0" startX="-40.66668701171875" startY="-23.0" />
+      <Line endX="752.0" layoutX="773.0" layoutY="390.0" startX="-773.0" />
+      <Button layoutX="164.0" layoutY="402.0" mnemonicParsing="false" onAction="#lese" text="Button" />
    </children>
 </AnchorPane>

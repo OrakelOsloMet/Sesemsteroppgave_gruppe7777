@@ -16,7 +16,7 @@ public class LoggInnKlasse {
             }
 
             else if(!input.matches(epostRegex)){
-                throw new Unntakk("Uriktig karakter i epost");
+                throw new Unntakk("Uriktig karakter i e-posten");
             }
             else {
                 this.admin_epost=input;
@@ -33,7 +33,7 @@ public class LoggInnKlasse {
             }
 
             else if(!input.matches(epostRegex)){
-                throw new Unntakk("Uriktig karakter i eposten!");
+                throw new Unntakk("Uriktig karakter i e-posten!");
             }
             else {
                 this.bruker_epost=input;
@@ -41,7 +41,7 @@ public class LoggInnKlasse {
         }
 
 
-
+        //passord validering til både admin og bruker
         void valideringPassord(String input) throws Unntakk{
             String passordRegex ="[a-z|A-Z|0-9|\\W]{4,}";
 
@@ -64,7 +64,7 @@ public class LoggInnKlasse {
 
 
             if (input.isEmpty()){
-                throw new Unntakk("Vennligst skriv inn passord!");
+                throw new Unntakk("Vennligst skriv inn passordet ditt!");
             }
 
 
