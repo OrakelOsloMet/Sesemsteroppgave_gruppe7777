@@ -1,17 +1,14 @@
 package sample;
 
-
-
-public class Minne {
-
+public class Harddisk {
     private String produsenter;
     private String kapasitet;
-    private String hastighet;
+    private String type;
     private Double pris;
     private String komponentsnavn;
 
-    Minne(){
-        komponentsnavn="Minne";
+    Harddisk(){
+        komponentsnavn="Harddisk";
 
     }
 
@@ -20,7 +17,7 @@ public class Minne {
     }
 
     public void setProdusenter(String navn) throws Unntakk {
-        String re= "(((C|c)rosair)|((C|c)rucial)|((D|d)ell)|((H|h)yperX))"; //lovelig input for navn av produsentere
+        String re= "(((C|c)rosair)|((C|c)rucial)|((S|s)amsung)|(WD (red|purple))|((S|s)eagate))"; //lovelig input for navn av produsentere
         if (navn.isEmpty()) {
             throw new Unntakk("Vennligst, fyll produsenters navn!");
         }
@@ -34,28 +31,37 @@ public class Minne {
 
 
     public void setKapasitet(String kapasitet) throws Unntakk{
-        String re= "((8)|(16)|(32))"; //lovelig input
+        int k;
+        if(true){
+            try {
+                k= Integer.parseInt(kapasitet);
+            } catch (Exception e){
+                throw new Unntakk(" kapasitet må være tall!");
+            }
+        }
+
         if ( kapasitet.isEmpty()){
             throw new Unntakk("Vennligst, fyll kapasitet!");
         }
 
-        else if(!(kapasitet).matches(re)){
+        else if(k<32 | k>1000){
             throw new Unntakk("Ugyldig kapasitet!");
         }
+
         this.kapasitet =kapasitet;
 
     }
 
-    public void setHastighet(String hastighet) throws Unntakk{
-        String re= "((1600)|(2400)|(3200))"; //lovelig input
-        if (hastighet.isEmpty()){
-            throw new Unntakk("Vennligst, fyll hastighet!");
+    public void setType(String type) throws Unntakk{
+        String re= "((HDD)|(SSD))"; //lovelig input
+        if (type.isEmpty()){
+            throw new Unntakk("Vennligst, fyll type!");
         }
 
-        else if(!(hastighet).matches(re)){
-            throw new Unntakk("Ugyldig hastighet!");
+        else if(!(type).matches(re)){
+            throw new Unntakk("Ugyldig type!");
         }
-        this.hastighet = hastighet;
+        this.type = type;
 
     }
 
@@ -73,7 +79,7 @@ public class Minne {
         }
 
         Double p = Double.parseDouble(pris); //konvertere parametret til double slik at vi kan gjøre opperasjoner på
-        if ( p <500 || p>2000){
+        if ( p <500 || p>6000){
             throw new Unntakk("Ugyldig pris!");
         }
         this.pris = p;
@@ -84,8 +90,8 @@ public class Minne {
         return produsenter;
     }
 
-    public String getHastighet() {
-        return hastighet;
+    public String getType() {
+        return type;
     }
 
     public String getKapasitet() {
@@ -99,10 +105,8 @@ public class Minne {
 
     @Override
     public String toString() {
-        String all_spes= "navn: "+ produsenter+" ... hastighet: "+ hastighet+ " ... kapasitet: "+ kapasitet;
+        String all_spes= "navn: "+ produsenter+" ... type: "+ type+ " ... kapasitet: "+ kapasitet;
         return all_spes;
         //return String.format("%s navn %s hastighet %s kapasitet %s pris", .......);
     }
-
-
 }

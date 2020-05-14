@@ -40,7 +40,7 @@ public class Prosessor {
 
         ////type AMD (Rayzen/ Athlon)     /intel (Core i3/5/7/9)/Xeon
 
-        String re= "(((I|i)ntel (Xeon|(C|c)ore i(3|5|7|9)))|(AMD (RYZEN|Athlon)))";
+        String re= "(((i|I)ntel ((x|X)eon|(C|c)ore i(3|5|7|9)))|(AMD (RYZEN|Athlon)))";
         if (type.isEmpty()){
             throw new Unntakk("Vennligst, fyll type!");
         }
@@ -126,7 +126,7 @@ public class Prosessor {
     @Override
     public String toString() {
 
-        String all_spes= "type: "+ type+",  antall core: "+ antall_core+ ",  antall threads: "+ antall_threads;
+        String all_spes= "type: "+ type+" ...  antall core: "+ antall_core+ " ...  antall threads: "+ antall_threads;
 
         return all_spes;
     }

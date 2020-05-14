@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class LoggInnController {
@@ -59,17 +58,27 @@ public class LoggInnController {
 
         if (brukerCheckBox.isSelected()){
                 try {
+
+                    Parent bruker_side = FXMLLoader.load(getClass().getResource("bruker.fxml"));
+                    Scene adminScene = new Scene(bruker_side);
+
+                    //This line gets the Stage information
+                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                    window.setScene(adminScene);
+                    window.fullScreenProperty();
+                    window.show();
                     loggInn_obj.valideringBrukerEpost(txtfield_brukernavn.getText());
                     loggInn_obj.valideringPassord(txtfield_passord.getText());
 
                     Parent admin_side = FXMLLoader.load(getClass().getResource("sample.fxml"));
-                    Scene adminScene = new Scene(admin_side);
+                    Scene brukerScene = new Scene(admin_side);
 
                     //This line gets the Stage information
-                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-                    window.setTitle("Admin side");
+                    Stage window_bruker = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    window.setTitle("bruker side");
                     window.setScene(adminScene);
-                    window.show();
+                    window_bruker.show();
                 } catch (Unntakk u){
                     label_feilmelding.setText( u.getMessage());
                 }
@@ -93,7 +102,7 @@ public class LoggInnController {
 
         }
 
-        //hvis adminCheckBox ble igjen deaktviert da programmet sette alt til difult. Dvs.
+        //hvis adminCheckBox ble igjen deaktviert da programmet sette alt til difult.
         if (!adminCheckBox.isSelected()){
             txtfield_brukernavn.setPromptText("");
             txtfield_passord.setPromptText("");
